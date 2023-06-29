@@ -1,7 +1,10 @@
  
-# quizz_app
+# Quiz Application 
 
 A new Flutter project.
+
+![Quiz](https://t3.ftcdn.net/jpg/04/35/38/50/240_F_435385050_AdhiMbyrn6hWj5DoJ13anGqqoc2tM3dM.jpg)
+
 
 ## Getting Started
 
