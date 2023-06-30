@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../constants.dart';
 import '../models/question_models.dart'; //question model
 import '../widgets/questions_widgets.dart'; //the question widget
+import '../widgets/next_button.dart';
 
 //Creating the HomeScreen widget
 //Stateful Widget is used because it is going to be our parent widget
@@ -66,10 +67,72 @@ class _HomeScreenState extends State<HomeScreen> {
         'Indian': false
       },
     ),
+    Question(
+      id: '15',
+      title: 'Who discovered gravity ?',
+      options: {
+        'Einstein': false,
+        'E. Goldstein': false,
+        'Chadwick': false,
+        'Newton': true
+      },
+    ),
+    Question(
+      id: '16',
+      title: 'Who climbed Mt. Everest first ?',
+      options: {
+        'Tenzing Norway': false,
+        'Edmund Hillary': false,
+        'All of the above': true,
+        'None of the above': false
+      },
+    ),
+    Question(
+      id: '17',
+      title: 'Where is river Thames located ?',
+      options: {
+        'Hong Kong': false,
+        'London': true,
+        'Paris': false,
+        'Switzerland': false
+      },
+    ),
+    Question(
+      id: '18',
+      title: 'Who is first Indian Woman to go in space ?',
+      options: {
+        'Kalpana Chawla': true,
+        'Priyanka Srisvastav': false,
+        'Yogita Shah': false,
+        'Swati Mohan': false
+      },
+    ),
+    Question(
+      id: '19',
+      title: 'Which is the largest desert in India ?',
+      options: {
+        'Indus Valley Desert': false,
+        'Jaisalmer': false,
+        'Thar': true,
+        'Bikaner': false
+      },
+    ),
   ];
 
   //creating an index to loop through questions
   int index = 0;
+
+  //create a function to display next question
+  void nextQuestion() {
+    if (index == _questions.length - 1) {
+      return;
+    } else {
+      setState(() {
+        index++; //when the index change to 1. rebuild the app
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     //chsnge the background
@@ -99,6 +162,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+
+      //use the floating action button,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        child: NextButton(
+          nextQuestion: nextQuestion, //the above function
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

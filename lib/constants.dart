@@ -12,6 +12,7 @@ const incorrect = Color(0xFFAB3232);
 const neutral = Color(0xFFF9F9F9);
 //set background color, as white is sensitive to eyes
 const background = Color(0xFF1A3464);
+const backgroundLight = Color(0xFFffff00);
 
 const lightGreenColor = Color(0xffB7F8DB);
 const skyBlueColor = Color(0xff50A7C2);
