@@ -4,6 +4,7 @@ import '../constants.dart';
 import '../models/question_models.dart'; //question model
 import '../widgets/questions_widgets.dart'; //the question widget
 import '../widgets/next_button.dart';
+import '../widgets/option_card.dart';
 
 //Creating the HomeScreen widget
 //Stateful Widget is used because it is going to be our parent widget
@@ -159,6 +160,15 @@ class _HomeScreenState extends State<HomeScreen> {
             const Divider(
               color: neutral,
             ),
+            //add some space,
+            const SizedBox(height: 25.0),
+            for (int i = 0; i < _questions[index].options.length; i++)
+              OptionCard(
+                option: _questions[index].options.keys.toList()[i],
+                color: _questions[index].options.values.toList()[i] == true
+                    ? correct
+                    : incorrect,
+              ),
           ],
         ),
       ),
