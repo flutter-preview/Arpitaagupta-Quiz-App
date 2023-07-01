@@ -122,27 +122,50 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //creating an index to loop through questions
   int index = 0;
+  //create a score variable
+  int score = 0;
 
   //create a boolean value to check if the user has clicked
   bool isPressed = false;
+  bool isAlreadySelected = false;
 
   //create a function to display next question
   void nextQuestion() {
     if (index == _questions.length - 1) {
       return;
     } else {
-      setState(() {
-        index++; //when the index change to 1. rebuild the app
-        isPressed = false;
-      });
+      if (isPressed) {
+        setState(
+          () {
+            index++; //when the index change to 1. rebuild the app
+            isPressed = false;
+            isAlreadySelected = false;
+          },
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text(
+            'Please select any option to continue!',
+            // textAlign: TextAlign.center,
+          ),
+          behavior: SnackBarBehavior.floating,
+          margin: EdgeInsets.symmetric(vertical: 20.0),
+        ));
+      }
     }
   }
 
   //create a function for changing color
-  void changeColor() {
-    setState(() {
-      isPressed = true;
-    });
+  void checkAnswerAndUpdate(bool value) {
+    if (isAlreadySelected) {
+      return;
+    } else {
+      score++;
+      setState(() {
+        isPressed = true;
+        isAlreadySelected = true;
+      });
+    }
   }
 
   @override
@@ -155,6 +178,15 @@ class _HomeScreenState extends State<HomeScreen> {
         title: const Text('Quiz App'),
         backgroundColor: skyBlueColor,
         shadowColor: Colors.transparent,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Text(
+              'Score : $score',
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+        ],
       ),
       body: Container(
         width: double.infinity,
@@ -174,14 +206,20 @@ class _HomeScreenState extends State<HomeScreen> {
             //add some space,
             const SizedBox(height: 25.0),
             for (int i = 0; i < _questions[index].options.length; i++)
-              OptionCard(
-                option: _questions[index].options.keys.toList()[i],
-                color: isPressed
-                    ? _questions[index].options.values.toList()[i] == true
-                        ? correct
-                        : incorrect
-                    : neutral,
-                onTap: changeColor,
+              GestureDetector(
+                onTap: () => checkAnswerAndUpdate(
+                    _questions[index].options.values.toList()[i]),
+                child: OptionCard(
+                  option: _questions[index].options.keys.toList()[i],
+                  //we need to check if the answer is correct or not,
+
+                  color: isPressed
+                      ? _questions[index].options.values.toList()[i] == true
+                          ? correct
+                          : incorrect
+                      : neutral,
+                  // onTap: changeColor,
+                ),
               ),
           ],
         ),
