@@ -123,6 +123,9 @@ class _HomeScreenState extends State<HomeScreen> {
   //creating an index to loop through questions
   int index = 0;
 
+  //create a boolean value to check if the user has clicked
+  bool isPressed = false;
+
   //create a function to display next question
   void nextQuestion() {
     if (index == _questions.length - 1) {
@@ -130,8 +133,16 @@ class _HomeScreenState extends State<HomeScreen> {
     } else {
       setState(() {
         index++; //when the index change to 1. rebuild the app
+        isPressed = false;
       });
     }
+  }
+
+  //create a function for changing color
+  void changeColor() {
+    setState(() {
+      isPressed = true;
+    });
   }
 
   @override
@@ -165,9 +176,12 @@ class _HomeScreenState extends State<HomeScreen> {
             for (int i = 0; i < _questions[index].options.length; i++)
               OptionCard(
                 option: _questions[index].options.keys.toList()[i],
-                color: _questions[index].options.values.toList()[i] == true
-                    ? correct
-                    : incorrect,
+                color: isPressed
+                    ? _questions[index].options.values.toList()[i] == true
+                        ? correct
+                        : incorrect
+                    : neutral,
+                onTap: changeColor,
               ),
           ],
         ),
