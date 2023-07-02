@@ -7,8 +7,6 @@
 
 **_The Quiz App offers the following features:_**
 
-## Features
-
 - **Question and Answer Format**: The app presents users with a series of multiple-choice questions, challenging them to select the correct answer from the provided options. This format encourages critical thinking and helps users reinforce their knowledge.
 
 - **Colorful UI**: The app features a visually appealing user interface, with color-coded options that provide immediate feedback on the correctness of each answer. The selected option turns green if correct or red if incorrect, enhancing the user experience and facilitating comprehension.
