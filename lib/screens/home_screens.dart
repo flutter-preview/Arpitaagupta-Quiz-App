@@ -5,6 +5,7 @@ import '../models/question_models.dart'; //question model
 import '../widgets/questions_widgets.dart'; //the question widget
 import '../widgets/next_button.dart';
 import '../widgets/option_card.dart';
+import '../widgets/result_box.dart';
 
 //Creating the HomeScreen widget
 //Stateful Widget is used because it is going to be our parent widget
@@ -60,7 +61,7 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
     Question(
       id: '14',
-      title: 'Which is the smallest ocean in the world',
+      title: 'Which is the smallest ocean in the world ?',
       options: {
         'Atlantic': false,
         'Arctic': true,
@@ -103,7 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
       title: 'Who is first Indian Woman to go in space ?',
       options: {
         'Kalpana Chawla': true,
-        'Priyanka Srisvastav': false,
+        'Priyanka Srivastav': false,
         'Yogita Shah': false,
         'Swati Mohan': false
       },
@@ -132,7 +133,15 @@ class _HomeScreenState extends State<HomeScreen> {
   //create a function to display next question
   void nextQuestion() {
     if (index == _questions.length - 1) {
-      return;
+      //this is the block where question ends
+      showDialog(
+          context: context,
+          barrierDismissible:
+              false, //this will disable the dismiss function on clicking outside of box
+          builder: (ctx) => ResultBox(
+                result: score, //total points the user got
+                questionLength: _questions.length, //out of how many questions
+              ));
     } else {
       if (isPressed) {
         setState(
@@ -160,7 +169,12 @@ class _HomeScreenState extends State<HomeScreen> {
     if (isAlreadySelected) {
       return;
     } else {
-      score++;
+      if (value) {
+        // Increment the score only if the answer is correct
+        setState(() {
+          score++;
+        });
+      }
       setState(() {
         isPressed = true;
         isAlreadySelected = true;
