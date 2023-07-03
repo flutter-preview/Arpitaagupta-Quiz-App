@@ -141,6 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (ctx) => ResultBox(
                 result: score, //total points the user got
                 questionLength: _questions.length, //out of how many questions
+                onPressed: startOver,
               ));
     } else {
       if (isPressed) {
@@ -180,6 +181,17 @@ class _HomeScreenState extends State<HomeScreen> {
         isAlreadySelected = true;
       });
     }
+  }
+
+  //create a function start over
+  void startOver() {
+    setState(() {
+      index = 0;
+      score = 0;
+      isPressed = false;
+      isAlreadySelected = false;
+    });
+    Navigator.pop(context);
   }
 
   @override

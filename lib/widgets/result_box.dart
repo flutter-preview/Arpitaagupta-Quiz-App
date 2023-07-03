@@ -6,10 +6,12 @@ class ResultBox extends StatelessWidget {
     Key? key,
     required this.result,
     required this.questionLength,
+    required this.onPressed,
   }) : super(key: key);
 
   final int result;
   final int questionLength;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -72,9 +74,7 @@ class ResultBox extends StatelessWidget {
             ),
             const SizedBox(height: 25.0),
             GestureDetector(
-              onTap: () {
-                //now we need a function to do the work
-              },
+              onTap: onPressed,
               child: const Text(
                 'Start Over',
                 style: TextStyle(
