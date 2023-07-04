@@ -64,11 +64,11 @@ class ResultBox extends StatelessWidget {
                   : result > questionLength / 2
                       ? 'Good!☺️' // when the result is more than half of the question length
                       : result == questionLength / 2
-                          ? 'Almost there!😐' // when the result is exactly half of the question length
+                          ? 'Almost There!😐' // when the result is exactly half of the question length
                           : 'Try Again!😫', // when the result is less than half of the question length
               style: const TextStyle(
                 color: neutral,
-                fontSize: 20.0,
+                fontSize: 18.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
